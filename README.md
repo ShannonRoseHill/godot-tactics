@@ -8,8 +8,8 @@ This process will be a line-by-line code review with extensive commenting and do
 Thus far, I have reviewed one entry:</p>
 
 1. Intro & Setup
-	+ Installation of the game engine
-	+ Project organization
+	+ Installing and configuring the game engine
+	+ Organizing directories
 	+ Importing assets
 	+ Creating objects from meshes and materials
 
