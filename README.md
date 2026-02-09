@@ -9,6 +9,6 @@ Thus far, I have reviewed one entry:</p>
 
 01. Intro & Setup
 
-<p>I am currently reviewing on:</p>
+<p>I am currently reviewing:</p>
 
 02. Board Generator
