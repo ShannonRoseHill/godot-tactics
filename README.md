@@ -6,7 +6,7 @@ This process will be a line-by-line code review with extensive commenting and do
 
 There are seventeen blog entries in the series, with the last being published on 29 August 2025.
 Thus far, I have reviewed one entry: <br>
-1. Intro & Setup
+	1. Intro & Setup
 
 I am currently working on: <br>
-2. Board Generator
+	2. Board Generator
