@@ -10,7 +10,8 @@ Thus far, I have reviewed one entry:</p>
 1. Intro & Setup
 	+ Installation of the game engine
 	+ Project organization
-	+ Importing assets and creating objects from material meshes
+	+ Importing assets
+	+ Creating objects from meshes and materials
 
 <p>I am currently reviewing:</p>
 
