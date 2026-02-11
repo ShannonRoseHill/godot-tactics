@@ -5,7 +5,7 @@ I'll do this by analyzing design decisions from 7thSage's [Godot Tactics](https:
 This process will be a line-by-line code review with commenting and documentation.
 
 <p>There are currently eighteen entries in the series, with the lastest being published on 29 August 2025.
-Thus far, I have reviewed one entry:</p>
+Thus far, I have reviewed two entries:</p>
 
 1. Intro & Setup
 	+ Installing and configuring the game engine
