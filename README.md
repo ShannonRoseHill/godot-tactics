@@ -2,9 +2,9 @@
 
 The purpose of this project is to learn the basics of tactical RPG development.
 I'll do this by analyzing design decisions from 7thSage's [Godot Tactics](https://theliquidfire.com/category/projects/godot-tactics/) series on the The Liquid Fire game programming blog.
-This process will be a line-by-line code review with extensive commenting and documentation.
+This process will be a line-by-line code review with commenting and documentation.
 
-<p>There are currently seventeen entries in the series, with the lastest being published on 29 August 2025.
+<p>There are currently eighteen entries in the series, with the lastest being published on 29 August 2025.
 Thus far, I have reviewed one entry:</p>
 
 1. Intro & Setup
@@ -13,6 +13,12 @@ Thus far, I have reviewed one entry:</p>
 	+ Importing assets
 	+ Creating objects from meshes and materials
 
+2. Board Generator
+	+ Defining the Tile class
+	+ Creating the BoardCreator plugin
+	+ Implementing Grow and Shrink methods to add/remove tiles
+	+ Implementing Save and Load methods for binary and JSON formats
+
 <p>I am currently reviewing:</p>
 
-2. Board Generator
+3. Input & Camera
