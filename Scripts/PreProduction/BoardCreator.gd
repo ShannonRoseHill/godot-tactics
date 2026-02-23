@@ -1,6 +1,6 @@
 @tool # Enables access to BoardCreator methods
 extends Node
-class_name BoardCreator # This class name helps place the board creator in the inspector plugin
+class_name BoardCreator # helps place the board creator in the inspector plugin
 
 # The width, depth, and height variable determine the size of the world
 # @export exposes the variable in the inspector
@@ -19,7 +19,7 @@ var marker # Holds a reference to the instantiated TSI prefab
 var _random = RandomNumberGenerator.new() # Used to get random rectangles for the GrowArea and ShrinkArea functions
 
 var savePath = "res://Data/Levels/" # Sets the save location for generated maps
-@export var fileName = "savegame.json"
+@export var fileName = "savegame.json" # Set the file name for save files
 
 # ##################################################################################################
 
@@ -159,6 +159,31 @@ func ShrinkArea():
 # Save the board as binary data to a .txt file
 func Save():
 	var saveFile = savePath + fileName # Concatenates savePath and fileName for complete saveFile path
+	SaveMap(saveFile)
+		
+# Button Seven: Load
+# Loads a saved board's binary data from a .txt file 
+func Load():
+	var saveFile = savePath + fileName # Concatenates savePath and fileName for complete saveFile path
+	LoadMap(saveFile)
+	
+# Button Eight: SaveJSON
+# Saves the board's data in JSON
+func SaveJSON():
+	var saveFile = savePath + fileName # Concatenates savePath and fileName for complete saveFile path
+	SaveMapJSON(saveFile)
+	
+# Button Nine: LoadJSON
+# Loads a board from a JSON file
+func LoadJSON():
+	var saveFile = savePath + fileName # Concatenates savePath and fileName for complete saveFile path
+	LoadMapJSON(saveFile)
+
+####################################################################################################
+# Algorithms for Save and Load buttons
+
+# Save the board as binary data to a .txt file
+func SaveMap(saveFile):
 	var saveGame = FileAccess.open(saveFile, FileAccess.WRITE) # Opens the saveFile with Write access
 	var version = 1 # Version number to track changes
 	var size = tiles.size() # Stores the number of tiles in a dictionary
@@ -172,14 +197,11 @@ func Save():
 		saveGame.store_8(tiles[key].height) # writes the height component of the tile position; advances the file cursor by one byte
 		
 	saveGame.close() # Close the saveGame file after writing data
-	
-	
-# Button Seven: Load
+
 # Loads a saved board's binary data from a .txt file 
-func Load():
+func LoadMap(saveFile):
 	Clear() # Clears the board of any existing tiles to avoid conflicts
 	
-	var saveFile = savePath + fileName # Concatenates savePath and fileName for complete saveFile path
 	if not FileAccess.file_exists(saveFile): # If no saveFile exists at the concatenated path,
 		return # return nothing
 	
@@ -198,10 +220,9 @@ func Load():
 	
 	saveGame.close() # Closes the saveGame file when finished reading data
 	_UpdateMarker() # Updates the position of the tile marker
-	
-# Button Eight: SaveJSON
+
 # Saves the board's data in JSON
-func SaveJSON():
+func SaveMapJSON(saveFile):
 	var mainDict = { # Create a dictionary defining the structure of the JSON file
 		"version": "1.0.0", # Version information to track changes to the board
 		"tiles": [] # Stores all tiles in an array
@@ -213,20 +234,19 @@ func SaveJSON():
 			"posZ" : tiles[key].pos.y, # store the y-coordinate component of the tile
 			"height" : tiles[key].height, # store the height component of the tile
 		}
-		mainDict["tiles"].append(saveDict) # store the tile in the tiles array of the mainDict 
-	
-	var saveFile = savePath + fileName # Concatenates savePath and fileName for complete saveFile path
+		mainDict["tiles"].append(saveDict) # store the tile in the tiles array of the mainDict
+		
 	var saveGame = FileAccess.open(saveFile, FileAccess.WRITE) # Open the saveFile with Write access
 	
 	var jsonString = JSON.stringify(mainDict, "\t", false) # Convert mainDict to JSON text for serialization
 	saveGame.store_line(jsonString) # Write the jsonString to the saveGame file
 	
-# Button Nine: LoadJSON
-# Loads a board from a JSON file
-func LoadJSON():
+	saveGame.close() # Close the saveGame file after writing data
+
+# Loads a board from a JSON file	
+func LoadMapJSON(saveFile):
 	Clear() # Clear the board of any existing tiles to avoid conflicts
 	
-	var saveFile = savePath + fileName # Concatenates savePath and fileName for complete saveFile path
 	if not FileAccess.file_exists(saveFile): # If no saveFile exists at the location,
 		return # do nothing; there is no file to return
 	
@@ -250,3 +270,5 @@ func LoadJSON():
 	
 	saveGame.close() # Close the saveGame file when finished loading data
 	_UpdateMarker() # Update the position of the tile selection marker
+
+####################################################################################################

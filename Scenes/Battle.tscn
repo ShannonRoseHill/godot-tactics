@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b76dd5sh73v2v"]
+
+[ext_resource type="Script" uid="uid://du6mtdpeelqoa" path="res://Scripts/Controller/BattleController.gd" id="1_1samx"]
+[ext_resource type="Script" uid="uid://dxjy21hiq2lyi" path="res://Scripts/Controller/InputController.gd" id="2_p46lj"]
+[ext_resource type="Script" uid="uid://ss0e8br1dwm" path="res://Scripts/PreProduction/BoardCreator.gd" id="3_8teo4"]
+[ext_resource type="Script" uid="uid://m7vopax3diqx" path="res://Scripts/Controller/CameraController.gd" id="4_c5ef4"]
+[ext_resource type="Script" uid="uid://cqd7h2301colx" path="res://Scripts/Test/Test.gd" id="5_p46lj"]
+
+[node name="Battle" type="Node3D" unique_id=988058861]
+
+[node name="Battle Controller" type="Node" parent="." unique_id=1959248329 node_paths=PackedStringArray("board", "inputController", "cameraController")]
+script = ExtResource("1_1samx")
+board = NodePath("Board")
+inputController = NodePath("Input Controller")
+cameraController = NodePath("Camera Controller")
+
+[node name="Input Controller" type="Node" parent="Battle Controller" unique_id=983453370]
+script = ExtResource("2_p46lj")
+
+[node name="Board" type="Node3D" parent="Battle Controller" unique_id=1711887029]
+script = ExtResource("3_8teo4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Battle Controller" unique_id=673528244]
+
+[node name="Camera Controller" type="Node3D" parent="Battle Controller" unique_id=1908282319]
+script = ExtResource("4_c5ef4")
+
+[node name="Heading" type="Node3D" parent="Battle Controller/Camera Controller" unique_id=1130273209]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
+
+[node name="Pitch" type="Node3D" parent="Battle Controller/Camera Controller/Heading" unique_id=1320604869]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Battle Controller/Camera Controller/Heading/Pitch" unique_id=1817472907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+projection = 1
+size = 10.0
+
+[node name="Test" type="Node" parent="Battle Controller" unique_id=1974401966]
+script = ExtResource("5_p46lj")
