@@ -19,7 +19,7 @@ Thus far, I have reviewed three entries:</p>
 	+ Implementing Grow and Shrink methods to add/remove tiles
 	+ Implementing Save and Load methods for binary and JSON formats
 
-3. Input and Camera
+3. Input & Camera
 	+ Creating controller classes for directional input and camera movement
 	+ Mapping input buttons
 	+ Implementing a camera with zoom and rotation functionality
