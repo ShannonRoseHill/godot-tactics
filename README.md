@@ -27,7 +27,7 @@ Thus far, I have reviewed four entries:</p>
 
 4. State Machine
 	+ Implementing state machine pattern to manage input to the BattleController node
-	+ Refactoring the cameraController
+	+ Refactoring the CameraController
 	+ Creating a BattleState class to register/unregister signal listeners
 	+ Linking the BattleState class to the BattleController
 
