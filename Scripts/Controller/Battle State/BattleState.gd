@@ -1,44 +1,48 @@
-extends Node
+extends State
+
+class_name BattleState
 
 var _owner: BattleController # Grants access to BattleController's inputController and board objects
 
-# Prepares the board node
 func _ready():
-	_owner = get_node("../") # Stores a reference to the BattleController node; goes up one level of the node tree
+	_owner = get_node("../../") # Make the battle state node a child of the state machine node
 	
-	_owner.cameraController.setFollow(_owner.board.marker) # Assigns a camera follower to the tile selection indicator
-	
-	var saveFile = _owner.board.savePath + _owner.board.fileName # Gets the saveFile by concatenating its path
-	_owner.board.LoadMap(saveFile) # Loads the saveFile
-	
-	AddListeners() # Listens for Signals
-
- # Called when destroying a node
-func _exit_tree():
-	RemoveListeners() # Cleans up any nodes listening for Signals
-
 # Creates nodes to listen to Signals from the game environment
 func AddListeners():
 	_owner.inputController.moveEvent.connect(OnMove) # Connects directional button signals to the InputController
 	_owner.inputController.fireEvent.connect(OnFire) # Connects non-directional button signals to the InputController
 	_owner.inputController.quitEvent.connect(OnQuit) # Connects Escape button signal to the InputController 
+	_owner.inputController.cameraZoomEvent.connect(Zoom) # Connects mouse scroll input to the inputController
+	_owner.inputController.cameraRotateEvent.connect(Orbit) # Connects mouse position vector to the inputController
 
 # Deletes nodes that are listening for Signals from the game environment
 func RemoveListeners():
 	_owner.inputController.moveEvent.disconnect(OnMove) # Ceases directional button signals to the InputController
 	_owner.inputController.fireEvent.disconnect(OnFire) # Ceases non-directional button signals to the InputController
 	_owner.inputController.quitEvent.disconnect(OnQuit) # Ceases Escape button signal to the InputController
-
-# Transmits signal information on the event of an directional button press
+	_owner.inputController.cameraZoomEvent.disconnect(Zoom) # Ceases mouse scroll signals to the inputController
+	_owner.inputController.cameraRotateEvent.disconnect(Orbit) # Disconnects mouse position vector from the inputController
+	
 func OnMove(e:Vector2i):
-	# Applies translations to directional input depending on the rotation of the camera
-	var rotatedPoint = _owner.cameraController.AdjustedMovement(e)
-	_owner.board.pos += rotatedPoint # Update the position of the cursor
-
-# Transmits signal information when a non-directional button is pressed
+	pass
+	
 func OnFire(e:int):
-	print("Fire: " + str(e)) # Prints the code of the button pressed
+	pass
+
+# Set the tile selection indicator on the board using a positional vector
+func SelectTile(p:Vector2i):
+	if _owner.board.pos == p: # If the TSI's location is the same as the vector,
+		return # do nothing
+	
+	_owner.board.pos = p # Set the TSI at the correct position
 
 # Transmits the Escape button's signal information
 func OnQuit():
 	get_tree().quit() # Closes the tree containing the BattleController node
+
+
+func Zoom(scroll: int):
+	pass
+
+func Orbit(direction: Vector2):
+	pass

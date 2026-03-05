@@ -1,8 +1,6 @@
 extends Node
 class_name CameraController
 
-var _owner: BattleController # Grants access to BattleController's inputController and board objects
-
 @export var _followSpeed: float = 3.0 # Sets the speed of the camera
 var _follow: Node3D # Stores a node object for the camera to follow
 
@@ -12,14 +10,6 @@ var _zoom = 10 # Set the current zoom level
 
 var _minPitch = -90 # Stops the rotation of the camera when its pointing straight down
 var _maxPitch = 0 # Stops the rotation of the camera when its level with the ground
-
-# The _ready() method is the equivalent to Unity's Awake() method
-# Called when loading an instance of a script component
-# Initializes variables or states before the application starts
-func _ready():
-	_owner = get_node("../") # Stores a reference to the BattleController node; goes up one level of the node tree 
-	Zoom(0) # Initializes camera with a neutral zoom position
-	AddListeners() # Listens for Signals
 
 # Update the position of the camera when following the tile selection indicator
 func _process(delta):
@@ -32,20 +22,6 @@ func _process(delta):
 func setFollow(follow: Node3D):
 	if follow: # If there is a node object for the camera to follow,
 		_follow = follow # store the object in the _follow variable
-
-# Closes the camera node tree
-func _exit_tree():
-	RemoveListeners() # Deletes all active listeners
-
-# Creates nodes to listen to signals from the game environment
-func AddListeners(): 
-	_owner.inputController.cameraZoomEvent.connect(Zoom) # Connects mouse scroll input to the inputController
-	_owner.inputController.cameraRotateEvent.connect(Orbit) # Connects mouse position vector to the inputController
-
-# Deletes nodes that are listening for signals from the game environment
-func RemoveListeners():
-	_owner.inputController.cameraZoomEvent.disconnect(Zoom) # Ceases mouse scroll signals to the inputController
-	_owner.inputController.cameraRotateEvent.disconnect(Orbit) # Disconnects mouse position vector from the inputController
 
 # Returns zoom values for orthogonal and perspective camera projection
 # Pitch: the physical distance in millimeters between the centers of two adjacent pixels (or sub-pixels) on a screen

@@ -5,7 +5,7 @@ I'll do this by analyzing design decisions from 7thSage's [Godot Tactics](https:
 This process will be a line-by-line code review with commenting and documentation.
 
 <p>There are currently eighteen entries in the series, with the lastest being published on 29 August 2025.
-Thus far, I have reviewed three entries:</p>
+Thus far, I have reviewed four entries:</p>
 
 1. Intro & Setup
 	+ Installing and configuring the game engine
@@ -25,6 +25,12 @@ Thus far, I have reviewed three entries:</p>
 	+ Implementing a camera with zoom and rotation functionality
 	+ Connecting signals for input and camera events
 
+4. State Machine
+	+ Implementing state machine pattern to manage input to the BattleController node
+	+ Refactoring the cameraController
+	+ Creating a BattleState class to register/unregister signal listeners
+	+ Linking the BattleState class to the BattleController
+
 <p>I am currently reviewing:</p>
 
-4. State Machine
+5. Pathfinding
